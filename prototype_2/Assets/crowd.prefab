@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3764598339262662272}
   m_Layer: 0
   m_Name: crowd
-  m_TagString: Untagged
+  m_TagString: crowd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
