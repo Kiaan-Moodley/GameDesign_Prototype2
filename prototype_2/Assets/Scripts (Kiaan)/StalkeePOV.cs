@@ -51,8 +51,13 @@ public class StalkeePOV : MonoBehaviour
     //Set Destination
     void UpdateDestination()
     {
-        target = waypoints[i].position;
-        agent.SetDestination(target);
+        StartCoroutine(Text());
+        IEnumerator Text()
+        {
+            yield return new WaitForSeconds(5);
+            target = waypoints[i].position;
+            agent.SetDestination(target);
+        }
     }
 
     //Updated Destination
