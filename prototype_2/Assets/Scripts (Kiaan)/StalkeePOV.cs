@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,8 +18,14 @@ public class StalkeePOV : MonoBehaviour
     RaycastHit hit;
     public float FOVAngle = 160f;
     public Animator anim;
+    bool isIdle;
 
     bool isWalking;
+    bool isTurning;
+
+    float minDist = 5f;
+    float maxDist = 10f;
+    float Dist;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -31,13 +36,30 @@ public class StalkeePOV : MonoBehaviour
 
     private void Update()
     {
-        //AI Movement
-        if(Vector3.Distance(transform.position,target)<1)
-        {
-            Check();
-            IterateWayPoint();
+        DistBetPlayers();
 
+        if (isWalking)
+        {
+            anim.Play("Walk");
+        }
+        else if (agent.transform.position == waypoints[i].position)
+        {
+            anim.Play("Idle");
+            isTurning = true;
+        }
+
+       else if (isTurning)
+        {
+            anim.Play("Turn");
+        }
+
+        //AI Movement
+        if (Vector3.Distance(transform.position,target)<1)
+        {
+            IterateWayPoint();
             UpdateDestination();
+            Check();
+
 
         }
 
@@ -55,24 +77,23 @@ public class StalkeePOV : MonoBehaviour
             }
         }
 
-        if (isWalking)
-        {
-            anim.SetInteger("anim", 1);
-
-        }
+       
     }
 
     //Set Destination
     void UpdateDestination()
     {
         StartCoroutine(Text());
+
         IEnumerator Text()
         {
 
             yield return new WaitForSeconds(5);
 
             target = waypoints[i].position;
+            isWalking = true;
             agent.SetDestination(target);
+            isIdle = true;
 
 
         }
@@ -80,9 +101,16 @@ public class StalkeePOV : MonoBehaviour
 
     void Check()
     {
-        if(agent.transform.position !=waypoints[i].position)
+        for (int i = 0; i < waypoints.Length; i++)
         {
-            isWalking = true;
+            if(agent.transform.position == waypoints[i].position)
+            {
+                Debug.Log("just landed");
+
+                isIdle = true;
+                anim.Play("Turn");
+                Debug.Log("just turned");
+            }
         }
     }
 
@@ -92,12 +120,31 @@ public class StalkeePOV : MonoBehaviour
         i++;
         if(i == waypoints.Length)
         {
+            isWalking = false;
+            isIdle = true;
             Debug.Log("End Point");
             i = 0;  //restart AI Loop
         }
 
         
 
+    }
+
+    public void DistBetPlayers()
+    {
+        Dist = Vector3.Distance(agent.transform.position, player.transform.position);
+        if(Dist< minDist)
+        {
+            //timer starts
+            Debug.Log("You are too close!");
+        }
+
+         if(Dist> maxDist)
+        {
+            //timer starts
+            Debug.Log("You are too far!");
+
+        }
     }
 
 

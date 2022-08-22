@@ -619,7 +619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0362bac363d427044bebec705849e38a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -178.4
+      value: -181.56
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0362bac363d427044bebec705849e38a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1278,6 +1278,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: af842d77de5e87c429bd278e91939cd5, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 062e12e77b87a8b47b3d915db7da939d, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 062e12e77b87a8b47b3d915db7da939d, type: 3}
 --- !u!1 &1807007826
@@ -1351,7 +1355,12 @@ MonoBehaviour:
   sightD: 15
   player: {fileID: 1670820654}
   FOVAngle: 160
-  anim: {fileID: 0}
+  anim: {fileID: 1813528374}
+--- !u!95 &1813528374 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 062e12e77b87a8b47b3d915db7da939d, type: 3}
+  m_PrefabInstance: {fileID: 1799009303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!195 &1813528376
 NavMeshAgent:
   m_ObjectHideFlags: 0
