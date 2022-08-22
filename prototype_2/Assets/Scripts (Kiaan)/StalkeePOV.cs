@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class StalkeePOV : MonoBehaviour
 {   
     //Movement
@@ -17,11 +18,15 @@ public class StalkeePOV : MonoBehaviour
     float angle;
     RaycastHit hit;
     public float FOVAngle = 160f;
+    public Animator anim;
 
+    bool isWalking;
     private void Start()
     {
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         UpdateDestination();
+
     }
 
     private void Update()
@@ -29,8 +34,11 @@ public class StalkeePOV : MonoBehaviour
         //AI Movement
         if(Vector3.Distance(transform.position,target)<1)
         {
+            Check();
             IterateWayPoint();
+
             UpdateDestination();
+
         }
 
         //AI Sight and Detection
@@ -46,6 +54,12 @@ public class StalkeePOV : MonoBehaviour
                 }
             }
         }
+
+        if (isWalking)
+        {
+            anim.SetInteger("anim", 1);
+
+        }
     }
 
     //Set Destination
@@ -54,9 +68,21 @@ public class StalkeePOV : MonoBehaviour
         StartCoroutine(Text());
         IEnumerator Text()
         {
+
             yield return new WaitForSeconds(5);
+
             target = waypoints[i].position;
             agent.SetDestination(target);
+
+
+        }
+    }
+
+    void Check()
+    {
+        if(agent.transform.position !=waypoints[i].position)
+        {
+            isWalking = true;
         }
     }
 
@@ -69,5 +95,10 @@ public class StalkeePOV : MonoBehaviour
             Debug.Log("End Point");
             i = 0;  //restart AI Loop
         }
+
+        
+
     }
+
+
 }
