@@ -27,10 +27,12 @@ public class StalkeePOV : MonoBehaviour
     private void Update()
     {
         //AI Movement
-        if(Vector3.Distance(transform.position,target)<1)
+        if (Vector3.Distance(transform.position, target) < 1)
         {
+
             IterateWayPoint();
             UpdateDestination();
+          
         }
 
         //AI Sight and Detection
@@ -51,23 +53,26 @@ public class StalkeePOV : MonoBehaviour
     //Set Destination
     void UpdateDestination()
     {
-        StartCoroutine(Text());
-        IEnumerator Text()
+        target = waypoints[i].position;
+        StartCoroutine(Delay());
+        IEnumerator Delay()
         {
             yield return new WaitForSeconds(5);
-            target = waypoints[i].position;
             agent.SetDestination(target);
+            
         }
+            
+ 
     }
 
     //Updated Destination
     void IterateWayPoint()
     {
-        i++;
-        if(i == waypoints.Length)
+            i++;
+            if (i == waypoints.Length)
         {
-            Debug.Log("End Point");
-            i = 0;  //restart AI Loop
+             Debug.Log("End Point");
+             i = 0;  //restart AI Loop
         }
     }
 }
