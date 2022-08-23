@@ -35,7 +35,8 @@ public class instantiateCrowd : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            ccPerson.height = 0;
+             ccPerson.height = 0;
+           //ccPerson.transform.position = new Vector3(ccPerson.transform.position.x, 0.3f, ccPerson.transform.position.z);
             timer = startTime;
             isTimer = true;
         }
@@ -51,7 +52,8 @@ public class instantiateCrowd : MonoBehaviour
             
             if (timer == 0)
             {
-                ccPerson.height = 1.8f;
+                 ccPerson.height = 2f;
+               // ccPerson.transform.position = new Vector3(ccPerson.transform.position.x, 0.6444f, ccPerson.transform.position.z);
                 isTimer = false;
             }
         }
