@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 
 public class StalkeePOV : MonoBehaviour
@@ -25,10 +26,19 @@ public class StalkeePOV : MonoBehaviour
 
     float minDist = 5f;
     float maxDist = 10f;
+
     float Dist;
 
     [SerializeField]
     private CurrentState _CurrentState;
+
+    public bool timerIsRunning = false;
+    public float timeRemaining = 10;
+    public float timeFarRemaining = 10;
+    float seconds;
+
+    bool tooClose = false;
+    bool tooFar = false;
     enum CurrentState
     {
         Idle,
@@ -36,12 +46,21 @@ public class StalkeePOV : MonoBehaviour
         Looking
 
     }
+
+    public GameObject TooFarAlert;
+    public GameObject TooCloseAlert;
+    public TextMeshProUGUI timerFar;
+    public TextMeshProUGUI timerClose;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         UpdateDestination();
         //_CurrentState = CurrentState.Idle;
+        tooClose = false;
+        tooFar = false;
+    
 
     }
     private void AnimationChecker()
@@ -70,6 +89,7 @@ public class StalkeePOV : MonoBehaviour
     {
         DistBetPlayers();
         AnimationChecker();
+        CheckTimer();
        // if (isWalking)
        // {
        //     anim.Play("Walk");
@@ -171,15 +191,101 @@ public class StalkeePOV : MonoBehaviour
         {
             //timer starts
             Debug.Log("You are too close!");
+            tooClose = true;
+            TooCloseAlert.SetActive(true);
+            timerIsRunning = true;
+        }
+        else
+        {
+            tooClose = false;
+            TooCloseAlert.SetActive(false);
+           timerIsRunning = false;
+            timeRemaining = 10;
+
         }
 
-         if(Dist> maxDist)
+        if (Dist> maxDist)
         {
             //timer starts
             Debug.Log("You are too far!");
+            tooFar = true;
+            TooFarAlert.SetActive(true);
+            timerIsRunning = true;
+
+        }
+        else
+        {
+            tooFar = false;
+            TooFarAlert.SetActive(false);
+            timerIsRunning = false;
+            timeFarRemaining = 10;
+
+
+        }
+    }
+
+    void CheckTimer()
+    {
+        seconds = Mathf.FloorToInt(timeRemaining % 60);
+        timerClose.text = seconds.ToString();
+        timerFar.text = seconds.ToString();
+        
+
+
+        if (timerIsRunning && tooClose == true)
+        {
+            timerClose.gameObject.SetActive(true);
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+            }
+
+            else if (timeRemaining < 0)
+            {
+                timerClose.gameObject.SetActive(false);
+                //Game over
+                Debug.Log("Game over");
+                timeRemaining = 0;
+                timerIsRunning = false;
+            }
+
+
+            if (tooClose == false)
+            {
+                timeRemaining = 10;
+                timerIsRunning = false;
+
+            }
+        }
+
+           else if (timerIsRunning && tooFar == true)
+        {
+            timerFar.text = seconds.ToString();
+            timerFar.gameObject.SetActive(true);
+                if (timeFarRemaining > 0)
+                {
+                    timeFarRemaining -= Time.deltaTime;
+                }
+                else
+                {
+                    timerFar.gameObject.SetActive(false);
+                    //Game over
+                    Debug.Log("Game over");
+                    timeFarRemaining = 0;
+                    timerIsRunning = false;
+                }
+                //if (tooFar == false)
+                //{
+                //    timeFarRemaining = 10;
+                //    timerIsRunning = false;
+
+                //}
+            }
 
         }
     }
 
 
-}
+
+
+
