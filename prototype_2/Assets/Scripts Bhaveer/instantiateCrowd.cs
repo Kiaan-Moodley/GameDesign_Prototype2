@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class instantiateCrowd : MonoBehaviour
 {
-    public GameObject goPrefab, charC;
+    public GameObject goPrefab, charC, goStalkee;
     public float startTime = 3f;
-    public float iCount = -5;
+    public float iCount = 0;
     public float timer = 0f, timer2 = 0f;
     public bool isTimer = false, isTimer2 = false;
     public CharacterController ccPerson;
@@ -20,13 +20,15 @@ public class instantiateCrowd : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.B))
         {
+            iCount = 0;
             for (int i = 0; i < 4; i++)
             {
-                Instantiate(goPrefab, new Vector3(iCount, 5, -1.1f), Quaternion.identity);
-                Instantiate(goPrefab, new Vector3(iCount + 0.4f, 5, 0f), Quaternion.identity);
-                iCount += 0.8f;
+               // Instantiate(goPrefab, new Vector3(iCount, 5, -1.1f), Quaternion.identity);
+               // Instantiate(goPrefab, new Vector3(iCount + 0.4f, 5, 0f), Quaternion.identity);
+                Instantiate(goPrefab, new Vector3(goStalkee.transform.position.x - 5f, 3, goStalkee.transform.position.z +iCount), Quaternion.identity);
+                iCount += 0.9f;
                 timer2 = startTime;
                 isTimer2 = true;
             }

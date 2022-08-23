@@ -11962,6 +11962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goPrefab: {fileID: 5333413048306240689, guid: d828494c9abc09a4dae661bdcf21002c, type: 3}
   charC: {fileID: 872036958}
+  goStalkee: {fileID: 1813528370}
   startTime: 3
   iCount: -5
   timer: 0
@@ -24350,6 +24351,13 @@ MonoBehaviour:
   FOVAngle: 160
   anim: {fileID: 1813528374}
   _CurrentState: 0
+  timerIsRunning: 0
+  timeRemaining: 10
+  timeFarRemaining: 10
+  TooFarAlert: {fileID: 0}
+  TooCloseAlert: {fileID: 0}
+  timerFar: {fileID: 0}
+  timerClose: {fileID: 0}
 --- !u!95 &1813528374 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 062e12e77b87a8b47b3d915db7da939d, type: 3}
