@@ -3956,7 +3956,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 938c20c1a63e2254aa45ab295b7ad488, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 938c20c1a63e2254aa45ab295b7ad488, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4002,6 +4002,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ch42_nonPBR@Laying Seizure
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 938c20c1a63e2254aa45ab295b7ad488, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a94c90d63a424de4da6147afaaa1b055, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 938c20c1a63e2254aa45ab295b7ad488, type: 3}
 --- !u!1 &222203346
