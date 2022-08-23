@@ -47,7 +47,8 @@ public class StalkeePOV : MonoBehaviour
     {
         Idle,
         Walking,
-        Looking
+        Looking,
+        Eating
 
     }
 
@@ -86,7 +87,12 @@ public class StalkeePOV : MonoBehaviour
             anim.SetBool("isLooking", true);
         }
 
-
+        else if(_CurrentState == CurrentState.Eating)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isLooking", false);
+            anim.SetBool("isEating", true);
+        }
     }
 
     private void Update()
@@ -181,10 +187,13 @@ public class StalkeePOV : MonoBehaviour
         i++;
         if (i == waypoints.Length)
         {
-            isWalking = false;
-            isIdle = true;
+            i = waypoints.Length;
+
+            _CurrentState = CurrentState.Looking;
+            _CurrentState = CurrentState.Eating;
             Debug.Log("End Point");
-            i = 0;  //restart AI Loop
+            Debug.Log("Game over. You win!");
+            //restart AI Loop
         }
 
 

@@ -346,6 +346,12 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: isEating
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isWalking
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isLooking
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5743514604115995422}
   m_Solo: 0
@@ -377,7 +383,7 @@ AnimatorStateMachine:
     m_Position: {x: 110, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5925519874829710681}
-    m_Position: {x: 470, y: 430, z: 0}
+    m_Position: {x: 490, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5743514604115995422}
     m_Position: {x: 395.30652, y: 496.29626, z: 0}
@@ -401,6 +407,12 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: isEating
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isWalking
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isLooking
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5743514604115995422}
