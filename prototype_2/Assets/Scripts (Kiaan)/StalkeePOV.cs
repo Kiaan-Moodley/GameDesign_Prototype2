@@ -26,32 +26,64 @@ public class StalkeePOV : MonoBehaviour
     float minDist = 5f;
     float maxDist = 10f;
     float Dist;
+
+    [SerializeField]
+    private CurrentState _CurrentState;
+    enum CurrentState
+    {
+        Idle,
+        Walking,
+        Looking
+
+    }
     private void Start()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         UpdateDestination();
+        _CurrentState = CurrentState.Idle;
+
+    }
+    private void AnimationChecker()
+    {
+        if (_CurrentState == CurrentState.Idle)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isLooking", false);
+        }
+        else if (_CurrentState == CurrentState.Walking)
+        {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isLooking", false);
+        }
+
+        else if (_CurrentState == CurrentState.Looking)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isLooking", true);
+        }
+
 
     }
 
     private void Update()
     {
         DistBetPlayers();
+        AnimationChecker();
+       // if (isWalking)
+       // {
+       //     anim.Play("Walk");
+       // }
+       // else if (agent.transform.position == waypoints[i].position)
+       // {
+       //     anim.Play("Idle");
+       //     isTurning = true;
+       // }
 
-        if (isWalking)
-        {
-            anim.Play("Walk");
-        }
-        else if (agent.transform.position == waypoints[i].position)
-        {
-            anim.Play("Idle");
-            isTurning = true;
-        }
-
-       else if (isTurning)
-        {
-            anim.Play("Turn");
-        }
+       //else if (isTurning)
+       // {
+       //     anim.Play("Turn");
+       // }
 
         //AI Movement
         if (Vector3.Distance(transform.position,target)<1)
@@ -59,6 +91,9 @@ public class StalkeePOV : MonoBehaviour
             IterateWayPoint();
             UpdateDestination();
             Check();
+            _CurrentState = CurrentState.Idle;
+            _CurrentState = CurrentState.Looking;
+
 
 
         }
@@ -83,17 +118,18 @@ public class StalkeePOV : MonoBehaviour
     //Set Destination
     void UpdateDestination()
     {
-
         target = waypoints[i].position;
+        _CurrentState = CurrentState.Walking;
+
+
         StartCoroutine(Delay());
 
         IEnumerator Delay()
         { 
             yield return new WaitForSeconds(5);
 
-            isWalking = true;
             agent.SetDestination(target);
-            isIdle = true;
+            _CurrentState = CurrentState.Walking;
         }
     }
 
