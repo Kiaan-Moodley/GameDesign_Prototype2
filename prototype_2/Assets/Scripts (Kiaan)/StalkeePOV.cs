@@ -33,11 +33,9 @@ public class StalkeePOV : MonoBehaviour
     private CurrentState _CurrentState;
 
     public bool timerIsRunning = false;
-    public bool timerIsRunningClose = false;
     public float timeRemaining = 10;
     public float timeFarRemaining = 10;
     float seconds;
-    float secondsFar;
 
     bool tooClose = false;
     bool tooFar = false;
@@ -89,8 +87,6 @@ public class StalkeePOV : MonoBehaviour
 
     private void Update()
     {
-        timerClose.text = seconds.ToString();
-        timerFar.text = secondsFar.ToString();
         DistBetPlayers();
         AnimationChecker();
         CheckTimer();
@@ -196,18 +192,14 @@ public class StalkeePOV : MonoBehaviour
             //timer starts
             Debug.Log("You are too close!");
             tooClose = true;
-            Debug.Log("Tooclose is true");
-
-            timerIsRunningClose = true;
-            Debug.Log("Tooclose is true and time is running");
-
             TooCloseAlert.SetActive(true);
+            timerIsRunning = true;
         }
         else
         {
             tooClose = false;
             TooCloseAlert.SetActive(false);
-           timerIsRunningClose = false;
+           timerIsRunning = false;
             timeRemaining = 10;
 
         }
@@ -235,39 +227,35 @@ public class StalkeePOV : MonoBehaviour
     void CheckTimer()
     {
         seconds = Mathf.FloorToInt(timeRemaining % 60);
-        secondsFar = Mathf.FloorToInt(timeFarRemaining % 60);
+        timerClose.text = seconds.ToString();
+        timerFar.text = seconds.ToString();
+        
 
 
-
-
-        if (timerIsRunningClose && tooClose == true)
+        if (timerIsRunning && tooClose == true)
         {
-            Debug.Log("Too close timr is running");
-            timerClose.text = seconds.ToString();
             timerClose.gameObject.SetActive(true);
             if (timeRemaining > 0)
             {
                 timeRemaining -= Time.deltaTime;
-                timerClose.text = seconds.ToString();
-
             }
 
-            else 
+            else if (timeRemaining < 0)
             {
                 timerClose.gameObject.SetActive(false);
                 //Game over
                 Debug.Log("Game over");
                 timeRemaining = 0;
-                timerIsRunningClose= false;
+                timerIsRunning = false;
             }
 
 
-            //if (tooClose == false)
-            //{
-            //    timeRemaining = 10;
-            //    timerIsRunning = false;
+            if (tooClose == false)
+            {
+                timeRemaining = 10;
+                timerIsRunning = false;
 
-            //}
+            }
         }
 
            else if (timerIsRunning && tooFar == true)
@@ -277,8 +265,7 @@ public class StalkeePOV : MonoBehaviour
                 if (timeFarRemaining > 0)
                 {
                     timeFarRemaining -= Time.deltaTime;
-                timerFar.text = secondsFar.ToString();
-            }
+                }
                 else
                 {
                     timerFar.gameObject.SetActive(false);
