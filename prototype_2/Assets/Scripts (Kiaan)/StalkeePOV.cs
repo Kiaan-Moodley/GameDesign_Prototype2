@@ -25,7 +25,7 @@ public class StalkeePOV : MonoBehaviour
     bool isWalking;
     bool isTurning;
 
-    float minDist = 2.5f;
+    float minDist = 3f;
     float maxDist = 20f;
 
     float Dist;
