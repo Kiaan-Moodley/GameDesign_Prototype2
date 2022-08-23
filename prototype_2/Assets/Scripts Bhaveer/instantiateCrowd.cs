@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class instantiateCrowd : MonoBehaviour
 {
     public GameObject goPrefab, charC, goStalkee;
+    public Slider slSus;
     public float startTime = 3f;
     public float iCount = 0;
     public float timer = 0f, timer2 = 0f;
@@ -23,6 +25,7 @@ public class instantiateCrowd : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B))
         {
             iCount = 0;
+            slSus.value += 2f;
             for (int i = 0; i < 4; i++)
             {
                // Instantiate(goPrefab, new Vector3(iCount, 5, -1.1f), Quaternion.identity);
@@ -40,6 +43,7 @@ public class instantiateCrowd : MonoBehaviour
               ccPerson.height = 0;
             //ccPerson.transform.position = new Vector3(ccPerson.transform.position.x, 0.3f, ccPerson.transform.position.z);
             //ccam.transform.position = new Vector3(ccam.transform.position.x, -2.1f, ccam.transform.position.z);
+            slSus.value += 2f;
             timer = startTime;
             isTimer = true;
         }

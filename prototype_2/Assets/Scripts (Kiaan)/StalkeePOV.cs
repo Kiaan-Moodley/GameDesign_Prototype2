@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class StalkeePOV : MonoBehaviour
@@ -36,6 +37,7 @@ public class StalkeePOV : MonoBehaviour
     public bool timerIsRunningClose = false;
     public float timeRemaining = 10;
     public float timeFarRemaining = 10;
+    public Slider slSus;
     float seconds;
     float secondsFar;
 
@@ -131,6 +133,7 @@ public class StalkeePOV : MonoBehaviour
                 if (hit.collider.tag == "Player")
                 {
                     Debug.Log("SUS");
+                    slSus.value += 2f;
                 }
             }
         }

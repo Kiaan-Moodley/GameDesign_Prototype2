@@ -11899,6 +11899,7 @@ MonoBehaviour:
   goPrefab: {fileID: 5333413048306240689, guid: d828494c9abc09a4dae661bdcf21002c, type: 3}
   charC: {fileID: 872036958}
   goStalkee: {fileID: 1813528370}
+  slSus: {fileID: 868361716}
   startTime: 3
   iCount: -5
   timer: 0
@@ -12845,6 +12846,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864649523}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &868361716 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9106625635585928590, guid: a8a5913d4a2ff934aadbfa47830d634a, type: 3}
+  m_PrefabInstance: {fileID: 1530710359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &872036958 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 0362bac363d427044bebec705849e38a, type: 3}
@@ -19880,9 +19892,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9106625635046834146, guid: a8a5913d4a2ff934aadbfa47830d634a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9106625635585928576, guid: a8a5913d4a2ff934aadbfa47830d634a, type: 3}
       propertyPath: m_Name
       value: suspicionBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106625635585928590, guid: a8a5913d4a2ff934aadbfa47830d634a, type: 3}
+      propertyPath: m_Value
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9106625635585928591, guid: a8a5913d4a2ff934aadbfa47830d634a, type: 3}
       propertyPath: m_Pivot.x
@@ -23807,6 +23827,7 @@ MonoBehaviour:
   timerIsRunningClose: 0
   timeRemaining: 10
   timeFarRemaining: 10
+  slSus: {fileID: 868361716}
   TooFarAlert: {fileID: 1625407972}
   TooCloseAlert: {fileID: 540258645}
   timerFar: {fileID: 378798149}
