@@ -22188,7 +22188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1625407973
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24352,6 +24352,7 @@ MonoBehaviour:
   anim: {fileID: 1813528374}
   _CurrentState: 0
   timerIsRunning: 0
+  timerIsRunningClose: 0
   timeRemaining: 10
   timeFarRemaining: 10
   TooFarAlert: {fileID: 1625407972}
