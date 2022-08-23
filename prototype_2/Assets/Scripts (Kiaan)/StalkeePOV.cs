@@ -41,7 +41,7 @@ public class StalkeePOV : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         UpdateDestination();
-        _CurrentState = CurrentState.Idle;
+        //_CurrentState = CurrentState.Idle;
 
     }
     private void AnimationChecker()
@@ -91,7 +91,6 @@ public class StalkeePOV : MonoBehaviour
             IterateWayPoint();
             UpdateDestination();
             Check();
-            _CurrentState = CurrentState.Idle;
             _CurrentState = CurrentState.Looking;
 
 
@@ -125,11 +124,12 @@ public class StalkeePOV : MonoBehaviour
         StartCoroutine(Delay());
 
         IEnumerator Delay()
-        { 
+        {
+
             yield return new WaitForSeconds(5);
+            _CurrentState = CurrentState.Walking;
 
             agent.SetDestination(target);
-            _CurrentState = CurrentState.Walking;
         }
     }
 
