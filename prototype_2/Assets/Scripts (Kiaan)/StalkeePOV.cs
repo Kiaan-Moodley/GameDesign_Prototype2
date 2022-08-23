@@ -168,7 +168,7 @@ public class StalkeePOV : MonoBehaviour
 
     void Check()
     {
-        for (int i = 0; i < waypoints.Length; i++)
+        for (int i = 0; i < 11; i++)
         {
             if (agent.transform.position == waypoints[i].position)
             {
@@ -187,7 +187,7 @@ public class StalkeePOV : MonoBehaviour
         i++;
         if (i == waypoints.Length)
         {
-            i = waypoints.Length;
+            i = 11;
 
             _CurrentState = CurrentState.Looking;
             _CurrentState = CurrentState.Eating;
