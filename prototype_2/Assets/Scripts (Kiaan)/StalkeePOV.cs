@@ -31,6 +31,7 @@ public class StalkeePOV : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         UpdateDestination();
+
     }
 
     private void Update()
@@ -58,6 +59,8 @@ public class StalkeePOV : MonoBehaviour
             IterateWayPoint();
             UpdateDestination();
             Check();
+
+
         }
 
         //AI Sight and Detection
@@ -73,20 +76,26 @@ public class StalkeePOV : MonoBehaviour
                 }
             }
         }
+
+       
     }
 
     //Set Destination
     void UpdateDestination()
     {
-
-        target = waypoints[i].position;
         StartCoroutine(Text());
+
         IEnumerator Text()
         {
+
             yield return new WaitForSeconds(5);
+
+            target = waypoints[i].position;
             isWalking = true;
             agent.SetDestination(target);
             isIdle = true;
+
+
         }
     }
 
@@ -109,13 +118,16 @@ public class StalkeePOV : MonoBehaviour
     void IterateWayPoint()
     {
         i++;
-        if (i == waypoints.Length)
+        if(i == waypoints.Length)
         {
             isWalking = false;
             isIdle = true;
             Debug.Log("End Point");
             i = 0;  //restart AI Loop
         }
+
+        
+
     }
 
     public void DistBetPlayers()
@@ -134,4 +146,6 @@ public class StalkeePOV : MonoBehaviour
 
         }
     }
+
+
 }
