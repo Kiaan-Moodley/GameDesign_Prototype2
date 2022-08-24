@@ -33,8 +33,8 @@ public class instantiateCrowd : MonoBehaviour
             {
                 // Instantiate(goPrefab, new Vector3(iCount, 5, -1.1f), Quaternion.identity);
                 // Instantiate(goPrefab, new Vector3(iCount + 0.4f, 5, 0f), Quaternion.identity);
-                Instantiate(goPrefab, new Vector3(goStalkee.transform.position.x - 5f, 3, goStalkee.transform.position.z + iCount), Quaternion.identity);
-                iCount += 0.9f;
+                Instantiate(goPrefab, new Vector3(goStalkee.transform.position.x - 5f, 0, goStalkee.transform.position.z + iCount), Quaternion.identity);
+                iCount += 1f;
                 timer2 = startTime;
                 isTimer2 = true;
             }

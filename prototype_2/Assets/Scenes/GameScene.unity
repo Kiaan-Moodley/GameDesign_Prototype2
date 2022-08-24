@@ -24243,6 +24243,7 @@ MonoBehaviour:
   timeRemaining: 10
   timeFarRemaining: 10
   slSus: {fileID: 868361716}
+  isLookingOnce: 0
   TooFarAlert: {fileID: 1625407972}
   TooCloseAlert: {fileID: 540258645}
   timerFar: {fileID: 378798149}
