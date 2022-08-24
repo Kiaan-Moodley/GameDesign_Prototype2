@@ -60,6 +60,8 @@ public class StalkeePOV : MonoBehaviour
     public TextMeshProUGUI timerClose;
      public instantiateCrowd susBar;
 
+    public AudioClip audioSound;
+
     private void Start()
     {
         anim = GetComponent<Animator>();

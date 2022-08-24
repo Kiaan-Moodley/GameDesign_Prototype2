@@ -41,4 +41,16 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("LoseScene");
 
     }
+
+    public void TooClose()
+    {
+        SceneManager.LoadScene("TooCloseScene");
+
+    }
+
+    public void TooFar()
+    {
+        SceneManager.LoadScene("TooFarScene");
+
+    }
 }
