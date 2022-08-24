@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 
 public class StalkeePOV : MonoBehaviour
@@ -281,6 +283,7 @@ public class StalkeePOV : MonoBehaviour
                 timerClose.gameObject.SetActive(false);
                 //Game over
                 Debug.Log("Game over");
+                SceneManager.LoadScene("TooCloseScene");
                 timeRemaining = 0;
                 timerIsRunningClose = false;
             }
@@ -308,8 +311,11 @@ public class StalkeePOV : MonoBehaviour
                 timerFar.gameObject.SetActive(false);
                 //Game over
                 Debug.Log("Game over");
+
                 timeFarRemaining = 0;
                 timerIsRunning = false;
+                SceneManager.LoadScene("TooFarScene");
+
             }
             //if (tooFar == false)
             //{

@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WinScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/TooFarScene.unity
+    guid: 8acd854e147b5e743a2a8afc55a58efb
+  - enabled: 1
+    path: Assets/Scenes/TooCloseScene.unity
+    guid: c86058ee8dfb63f4080b14e5ba85330b
   m_configObjects: {}
