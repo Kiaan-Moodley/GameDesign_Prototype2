@@ -24,9 +24,11 @@ public class StalkeePOV : MonoBehaviour
 
     bool isWalking;
     bool isTurning;
+    bool isLooking ;
 
     float minDist = 3f;
     float maxDist = 20f;
+    float susValue = 0;
 
     float Dist;
 
@@ -56,16 +58,17 @@ public class StalkeePOV : MonoBehaviour
     public GameObject TooCloseAlert;
     public TextMeshProUGUI timerFar;
     public TextMeshProUGUI timerClose;
+     public instantiateCrowd susBar;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         UpdateDestination();
-        //_CurrentState = CurrentState.Idle;
+        _CurrentState = CurrentState.Idle;
         tooClose = false;
         tooFar = false;
-
+        
 
     }
     private void AnimationChecker()
@@ -85,6 +88,8 @@ public class StalkeePOV : MonoBehaviour
         {
             anim.SetBool("isWalking", false);
             anim.SetBool("isLooking", true);
+            isLooking = true;
+            Debug.Log("isLooking is true");
         }
 
         else if(_CurrentState == CurrentState.Eating)
@@ -102,6 +107,7 @@ public class StalkeePOV : MonoBehaviour
         DistBetPlayers();
         AnimationChecker();
         CheckTimer();
+        Suspicion();
         // if (isWalking)
         // {
         //     anim.Play("Walk");
@@ -124,6 +130,8 @@ public class StalkeePOV : MonoBehaviour
             UpdateDestination();
             Check();
             _CurrentState = CurrentState.Looking;
+            Debug.Log(CurrentState.Looking+ "I am looking");
+            //isLooking = true;
 
 
 
@@ -152,6 +160,7 @@ public class StalkeePOV : MonoBehaviour
     {
         target = waypoints[i].position;
         _CurrentState = CurrentState.Walking;
+        isLooking = false;
 
 
         StartCoroutine(Delay());
@@ -161,8 +170,8 @@ public class StalkeePOV : MonoBehaviour
 
             yield return new WaitForSeconds(5);
             _CurrentState = CurrentState.Walking;
-
             agent.SetDestination(target);
+
         }
     }
 
@@ -307,6 +316,80 @@ public class StalkeePOV : MonoBehaviour
             //}
         }
 
+       
+
+    }
+    public void Suspicion()
+    {
+        if(susBar.isBlending && isLooking == true)
+        {
+            float appdist1 = 10;
+            Dist = Vector3.Distance(agent.transform.position, player.transform.position);
+            if (Dist<=appdist1)
+            {
+                Debug.Log("isBledning and && isLooking is true");
+                susValue += 2;
+
+                slSus.value = susValue;
+                Debug.Log(slSus.value);
+
+                susBar.isBlending = false;
+                isLooking = false;
+
+            }
+
+        }
+        //code not working, slider is filled up completely. Most likely has to do with the update function
+        // if(!susBar.isBlending && isLooking == true)
+        //{
+        //    susBar.isBlending = true;
+
+        //    susValue += 5;
+
+        //    slSus.value = susValue;
+
+        //    isLooking = false;
+        //    Debug.Log(slSus.value);
+          
+        //}
+
+        //******* Also does the same constantly repeating until slider is full*******//
+        if (susBar.isCrouching && isLooking == true)
+        {
+            Debug.Log("isCrouching is true and isLooking is true");
+            float appdist = 7;
+            Dist = Vector3.Distance(agent.transform.position, player.transform.position);
+            // if player is at a certain distance from stalkee
+            //if player is further then, it shouldnt matter.
+            if (Dist<=appdist)
+
+            {
+                Debug.Log("isCrouching and && isLooking is true");
+                susValue += 2;
+
+                slSus.value = susValue;
+                Debug.Log(slSus.value);
+
+                susBar.isBlending = false;
+                isLooking = false;
+            }
+           
+
+        }
+
+        if(isLooking && !susBar.isBlending && !susBar.isCrouching)
+        {
+            Debug.Log("isLooking but player is not bledning or crouching");
+            Dist = Vector3.Distance(agent.transform.position, player.transform.position);
+            float appdist2 = 13;
+            if (Dist<appdist2)
+            {
+                susValue += 5;
+                slSus.value = susValue;
+
+            }
+                
+        }
     }
 }
 
