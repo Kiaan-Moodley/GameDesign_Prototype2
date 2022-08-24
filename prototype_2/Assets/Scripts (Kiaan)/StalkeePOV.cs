@@ -47,6 +47,7 @@ public class StalkeePOV : MonoBehaviour
 
     bool tooClose = false;
     bool tooFar = false;
+    public bool isLookingOnce = false;
     enum CurrentState
     {
         Idle,
@@ -82,14 +83,16 @@ public class StalkeePOV : MonoBehaviour
         {
             anim.SetBool("isWalking", false);
             anim.SetBool("isLooking", false);
+            isLookingOnce = true;
         }
         else if (_CurrentState == CurrentState.Walking)
         {
             anim.SetBool("isWalking", true);
             anim.SetBool("isLooking", false);
+            isLookingOnce = true;
         }
 
-        else if (_CurrentState == CurrentState.Looking)
+        else if ((_CurrentState == CurrentState.Looking) && (isLookingOnce == true))
         {
             anim.SetBool("isWalking", false);
             anim.SetBool("isLooking", true);
@@ -102,6 +105,7 @@ public class StalkeePOV : MonoBehaviour
             anim.SetBool("isWalking", false);
             anim.SetBool("isLooking", false);
             anim.SetBool("isEating", true);
+            isLookingOnce = true;
         }
     }
 
@@ -344,6 +348,7 @@ public class StalkeePOV : MonoBehaviour
 
                 susBar.isBlending = false;
                 isLooking = false;
+                isLookingOnce = false;
 
             }
 
@@ -381,6 +386,7 @@ public class StalkeePOV : MonoBehaviour
 
                 susBar.isBlending = false;
                 isLooking = false;
+                isLookingOnce = false;
             }
            
 
@@ -390,12 +396,14 @@ public class StalkeePOV : MonoBehaviour
         {
             Debug.Log("isLooking but player is not bledning or crouching");
             Dist = Vector3.Distance(agent.transform.position, player.transform.position);
-            float appdist2 = 13;
+            float appdist2 = 7 ;
             if (Dist<appdist2)
             {
                 susValue += 5;
+                Debug.Log(susValue);
                 slSus.value = susValue;
-
+                isLooking = false;
+                isLookingOnce = false;
             }
                 
         }
