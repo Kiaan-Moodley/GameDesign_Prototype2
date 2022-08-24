@@ -60,7 +60,7 @@ public class StalkeePOV : MonoBehaviour
     public TextMeshProUGUI timerClose;
      public instantiateCrowd susBar;
 
-    public AudioClip audioSound;
+    public AudioSource audioSound;
 
     private void Start()
     {
@@ -70,6 +70,7 @@ public class StalkeePOV : MonoBehaviour
         _CurrentState = CurrentState.Idle;
         tooClose = false;
         tooFar = false;
+        audioSound.Play();
         
 
     }
